@@ -46,38 +46,43 @@ def solve_sudoku_puzzle(board):
                     col_hm[col].add(board[row][col])
                     square_hm[find_square(row, col)].add(board[row][col])
 
-    def backtrack(curr, row_index, col_index):
-        if row_index >= m:
-            ans = curr
-            return
-        for col in range(col_index, m):
-            if curr[row_index][col] == 0:
-                for num in range(1, 10):
-                    if num not in row_hm[row_index]:
-                        if num not in col_hm[col]:
-                            square = find_square(row_index, col)
-                            if num not in square_hm[square]:
-                                print(row_index, col)
-                                row_hm[row_index].add(num)
-                                col_hm[col].add(num)
-                                square_hm[square].add(num)
-                                curr[row_index][col] = num
-                                if col == m - 1:
-                                    backtrack(curr, row_index + 1, 0)
-                                else:
-                                    backtrack(curr, row_index, col + 1)
-                                # backtrack(curr, row_index + 1)
-                                curr[row_index][col] = 0
-                                square_hm[square].remove(num)
-                                col_hm[col].remove(num)
-                                row_hm[row_index].remove(num)
-                return
-        
+    def could_place(number, row, col):
+        square = find_square(row, col)
+        return number not in row_hm[row] \
+            and number not in col_hm[col] \
+            and number not in square_hm[square]
+
     ans = []
+    def backtrack(row_index, col_index):
+        nonlocal ans
+        if row_index >= m:
+            ans = [row[:] for row in board]
+            return
+        if board[row_index][col_index] == 0:
+            for num in range(1, 10):
+                if could_place(num, row_index, col_index):
+                    square = find_square(row_index, col_index)
+                    row_hm[row_index].add(num)
+                    col_hm[col_index].add(num)
+                    square_hm[square].add(num)
+                    board[row_index][col_index] = num
+                    if col_index == m - 1:
+                        backtrack(row_index + 1, 0)
+                    else:
+                        backtrack(row_index, col_index + 1)
+                    board[row_index][col_index] = 0
+                    square_hm[square].remove(num)
+                    col_hm[col_index].remove(num)
+                    row_hm[row_index].remove(num)
+        else:
+            if col_index == m - 1:
+                backtrack(row_index + 1, 0)
+            else:
+                backtrack(row_index, col_index + 1)
+        
     preprocess_board()
-    backtrack(board, 0, 0)
-    print(ans)
-    return []
+    backtrack(0, 0)
+    return ans
 
 
 if __name__ == "__main__":
