@@ -7,3 +7,9 @@
 5. Heap Sort - O(n^log(n))
 6. Counting Sort - O(n)
 7. Radix Sort - O(n)
+
+
+#   Important algorithms to note
+
+1. Kadane's Algorithm (to find maximum subarray sum)
+2. Kane's Algorithm (Graph topological sorting)
