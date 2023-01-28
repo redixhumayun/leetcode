@@ -6,7 +6,7 @@ below the weight value.
 Time complexity -> O(n*W), where n is the number of items and W is the allowed weight limit
 Space complexity -> O(n*W), same as above
 """
-def knapsack(weights, values, weight) -> int:
+def knapsack_with_repetition(weights, values, weight) -> int:
     dp = [0] * (weight + 1)
     dp[0] = 0 # If the available weight is zero, no items can be picked up and thus no value
     for i in range(1, len(dp)):
@@ -22,4 +22,4 @@ if __name__ == "__main__":
     weights = [6, 3, 4, 2]
     values = [30, 14, 16, 9]
     weight = 10
-    print(knapsack(weights, values, weight))
+    print(knapsack_with_repetition(weights, values, weight))
