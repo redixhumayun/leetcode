@@ -3,6 +3,22 @@ Given a text and list of keywords, return a list of booleans representing whethe
 string = "quick brown fox", keywords = ["lazy", "quick", "dog"]
 """
 
+"""
+Terminology
+
+N - length of the entire input string
+M - length of the keywords list
+J - average length of the words in the keywords list
+K - length of the longest word in the keywords list
+
+Space Complexity - O(N) for the trie DS, assuming that there is no prefix shared 
+                    among any of the words which is the case for the specific test case provided here
+
+Time Complexity - O(N) for building the trie.
+                O(J*M) because that is the average length and each character in each word needs to be
+                iterated over and compared against a character in the trie. Comparison is O(1)
+"""
+
 
 class TrieNode:
     def __init__(self, value=None):
