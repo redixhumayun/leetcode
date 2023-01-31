@@ -5,7 +5,7 @@ class BinaryTreeNode:
         self.right = None
 
 
-#   This solution taken from here: https://uplevel.interviewkickstart.com/resource/editorial/rc-codingproblem-433360-792461-1042-6383
+#   This solution is taken from here: https://uplevel.interviewkickstart.com/resource/editorial/rc-codingproblem-433360-792461-1042-6383
 def iterative_traversal(root):
     if root is None:
         return []
